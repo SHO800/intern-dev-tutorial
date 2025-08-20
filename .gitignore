@@ -7,3 +7,4 @@ chat-gpt-api/sample/log
 
 node_modules
 .cache
+.idea

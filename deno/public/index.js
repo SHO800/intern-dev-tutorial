@@ -3,6 +3,6 @@
  */
 
 addEventListener('load', async () => {
-	const response = await fetch('/welcome-message');
-	document.querySelector('#welcomeMessage').innerText = await response.text();
-});
+	const response = await fetch('/welcome-message')
+	document.querySelector('#welcomeMessage').innerText = await response.text()
+})

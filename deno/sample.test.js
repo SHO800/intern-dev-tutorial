@@ -1,6 +1,7 @@
-import { assertEquals } from 'testing/asserts.ts';
+import {assertEquals} from '@std/assert';
+
 
 Deno.test('1 + 1 は 2 である', () => {
 	// 1 + 1 は 2 であることを確かめる
-	assertEquals(1 + 1, 2);
-});
+	assertEquals(1 + 1, 2)
+})
