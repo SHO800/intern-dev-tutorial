@@ -15,16 +15,45 @@ Deno.serve(async (req) => {
 
 	// publicフォルダ内にあるファイルを返す
     // return new Response(Deno.cwd(), )
-    // const files = await Deno.readDir('public')
-    // const fileNames = Array.from(files).map(file => file.name)
-    // console.log(fileNames)
-    // return new Response(" ")
+    const cwd = Deno.cwd()
+    console.log('Current working directory:', cwd)
+    const files = []
+    for await (const file of Deno.readDir(cwd)) {
+        files.push(file.name)
+    }
+    console.log('Files in cwd:', files)
+        
     
-	return serveDir(req, {
-		fsRoot: 'deno/public',
-		urlRoot: '',
-		showDirListing: true,
-		enableCors: true,
-	})
+    // htmlで返す
+    return new Response( `
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jig.jpインターン</title>
+</head>
+<body>
+    <h1>jig.jpインターンへようこそ！</h1>
+    <p>現在の作業ディレクトリ: ${cwd}</p>
+    <p>ファイル一覧:</p>
+    <ul>
+        ${files.map(file => `<li>${file}</li>`).join('')}
+    </ul>
+</body>
+</html>
+`, {
+        headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+        },
+    })
+    
+    
+    
+	// return serveDir(req, {
+	// 	fsRoot: 'public',
+	// 	urlRoot: '',
+	// 	showDirListing: true,
+	// 	enableCors: true,
+	// })
 })
-
