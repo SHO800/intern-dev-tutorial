@@ -1,4 +1,5 @@
-import { serveDir } from '@std/http'
+// import { serveDir,  } from '@std/http'
+import { serveDir } from 'jsr:@std/http@^1.0.17'
 
 /**
  * APIリクエストを処理する
@@ -13,6 +14,8 @@ Deno.serve((req) => {
 	}
 
 	// publicフォルダ内にあるファイルを返す
+    return new Response(Deno.cwd(), )
+    // return new Response(Deno.readDirSync()
 	return serveDir(req, {
 		fsRoot: 'public',
 		urlRoot: '',
